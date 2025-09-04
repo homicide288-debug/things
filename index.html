@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Jalpari 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("img.png") no-repeat center center fixed; /* replace with img2.png if you want */
+      background-size: cover;
+      font-family: "Segoe UI", sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    #text { display: none; margin-top: 20px; position: relative; z-index: 2; }
+    #code { font-size: 20px; line-height: 1.6; color: #fff; text-align: left; display: inline-block; }
+    #clock-box { margin-top: 20px; font-size: 22px; color: #ffebf0; position: relative; z-index: 2; }
+    canvas { display: block; margin: 0 auto; background: transparent !important; position: relative; z-index: 1; }
+    .say { display: block; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <div id="text">
+      <div id="code">
+        <span class="say">My Jalpari 💖</span>
+        <span class="say">Happy Birthday 🎂🎈</span>
+        <span class="say">May God bless you 🍀</span>
+        <span class="say">And fill your life with endless happiness 💕</span>
+        <span class="say">I love you ❤️</span>
+        <span class="say">And I always will ❤️</span>
+        <span class="say">Hope you have the most magical day ❤️😘</span>
+      </div>
+    </div>
+    <div id="clock-box">
+      <span id="clock"></span>
+    </div>
+    <canvas id="canvas" width="1100" height="680"></canvas>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Typewriter effect
+    (function(){
+      function typeWriter(el){
+        const text = el.innerHTML;
+        el.innerHTML = "";
+        let i = 0;
+        function typing(){
+          if(i < text.length){
+            el.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 50);
+          }
+        }
+        typing();
+      }
+      document.getElementById("text").style.display="block";
+      typeWriter(document.getElementById("code"));
+    })();
+
+    // Birthday countdown (to 5 Sept 2025)
+    function updateClock(){
+      const target = new Date("September 5, 2025 00:00:00"); 
+      const now = new Date();
+      let diff = Math.floor((target - now) / 1000);
+
+      if (diff < 0) {
+        document.getElementById("clock").innerHTML = "🎉 It's your Birthday Today! 🎉";
+        return;
+      }
+
+      const days = Math.floor(diff / (3600*24));
+      diff -= days*3600*24;
+      const hrs = Math.floor(diff / 3600);
+      diff -= hrs*3600;
+      const mins = Math.floor(diff / 60);
+      const secs = diff - mins*60;
+
+      document.getElementById("clock").innerHTML =
+        days + " days " + hrs + " hours " + mins + " minutes " + secs + " seconds left 🎂";
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Tree animation (simplified blossom version)
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const flowers = [];
+
+    function Flower(x, y){
+      this.x = x;
+      this.y = y;
+      this.size = Math.random()*6+2;
+      this.color = "rgba(255,182,193,"+(Math.random()*0.8+0.2)+")";
+      this.dy = Math.random()*1+0.5;
+      this.dx = (Math.random()-0.5)*1;
+    }
+    Flower.prototype.draw=function(){
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+      ctx.fillStyle=this.color;
+      ctx.fill();
+    }
+    Flower.prototype.update=function(){
+      this.y += this.dy;
+      this.x += this.dx;
+      if(this.y > canvas.height) {
+        this.y = Math.random()*-20;
+        this.x = Math.random()*canvas.width;
+      }
+      this.draw();
+    }
+
+    function initFlowers(){
+      for(let i=0;i<300;i++){
+        const x = Math.random()*canvas.width;
+        const y = Math.random()*canvas.height;
+        flowers.push(new Flower(x,y));
+      }
+    }
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      flowers.forEach(f=>f.update());
+      requestAnimationFrame(animate);
+    }
+    initFlowers();
+    animate();
+
+    window.addEventListener("resize", ()=>{
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
