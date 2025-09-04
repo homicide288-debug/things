@@ -1329,7 +1329,6 @@ if (isCommonJS) {
     
     init(Jscex);
 }
-
 /*
 scope.tokenizer = tokenizer;
 scope.parse = parse;
