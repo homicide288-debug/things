@@ -1,193 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Birthday My Jalpari 💖</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: url("img.png") no-repeat center center fixed; /* replace with img2.png if needed */
-      background-size: cover;
-      font-family: "Segoe UI", sans-serif;
-      overflow: hidden;
-      text-align: center;
-    }
-    #start-screen {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 9999;
-      color: white;
-    }
-    #start-screen button {
-      background: #ff69b4;
-      border: none;
-      padding: 15px 30px;
-      font-size: 20px;
-      border-radius: 12px;
-      cursor: pointer;
-      color: #fff;
-      box-shadow: 0 0 15px rgba(255,105,180,0.8);
-      transition: transform 0.2s;
-    }
-    #start-screen button:hover {
-      transform: scale(1.1);
-    }
-    #text { display: none; margin-top: 20px; position: relative; z-index: 2; }
-    #code { font-size: 20px; line-height: 1.6; color: #fff; text-align: left; display: inline-block; }
-    #clock-box { margin-top: 20px; font-size: 22px; color: #ffebf0; position: relative; z-index: 2; }
-    canvas { display: block; margin: 0 auto; background: transparent !important; position: relative; z-index: 1; }
-    .say { display: block; margin: 5px 0; }
-  </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>HBD love</title>	    
+    <link type="text/css" rel="stylesheet" href="./file/default.css">
+    <script type="text/javascript" src="./file/jquery.min.js"></script>
+    <script type="text/javascript" src="./file/jscex.min.js"></script>
+    <script type="text/javascript" src="./file/jscex-parser.js"></script>
+    <script type="text/javascript" src="./file/jscex-jit.js"></script>
+    <script type="text/javascript" src="./file/jscex-builderbase.min.js"></script>
+    <script type="text/javascript" src="./file/jscex-async.min.js"></script>
+    <script type="text/javascript" src="./file/jscex-async-powerpack.min.js"></script>
+    <script type="text/javascript" src="./file/functions.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./file/love.js" charset="utf-8"></script>
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
 </head>
 <body>
-  <!-- Start Screen -->
-  <div id="start-screen">
-    <h1>💖 Happy Birthday My Jalpari 💖</h1>
-    <p>Click below to begin your surprise 🎉</p>
-    <button onclick="startExperience()">Start</button>
-  </div>
-
-  <!-- Hidden Main Content -->
-  <div id="wrap" style="display:none;">
-    <div id="text">
-      <div id="code">
-        <span class="say">My Jalpari 💖</span>
-        <span class="say">Happy Birthday 🎂🎈</span>
-        <span class="say">May God bless you 🍀</span>
-        <span class="say">And fill your life with endless happiness 💕</span>
-        <span class="say">I love you ❤️</span>
-        <span class="say">And I always will ❤️</span>
-        <span class="say">Hope you have the most magical day ❤️😘</span>
-      </div>
+    <div id="main">
+        <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
+        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
+            <source src="aud.mp3" type="audio/mp3" />
+            <embed height="100" width="100" src="aud.mp3" />
+        </audio>
+        <div id="wrap">
+            <div id="text">
+                <div id="code">
+                    <span class="say">My JALPARI 💞</span><br>
+                    <span class="say">Happy Birthday 🎈</span><br>
+                    <span class="say">May God bless you 🍀</span><br>
+                    <span class="say">And give u many happiness 💕</span><br>
+                    <span class="say">I loved you ❤️</span><br>
+                    <span class="say">And I will always love u ❤️</span><br>
+                    <span class="say">Hope u have a great day today ❤️😘</span><br>
+                </div>
+            </div>
+            <div id="clock-box">
+                <span id="clock">6939 days 18 hours 1080 minutes 64800 seconds</span> <!-- Change to "6940 days..." if needed -->
+            </div>
+            <canvas id="canvas" width="1100" height="680"></canvas>
+        </div>
     </div>
-    <div id="clock-box">
-      <span id="clock"></span>
-    </div>
-    <canvas id="canvas" width="1100" height="680"></canvas>
 
-    <!-- Background Music -->
-    <audio id="bg-music" loop>
-      <source src="birthday.mp3" type="audio/mpeg">
-    </audio>
-  </div>
-
-  <script>
-    function startExperience() {
-      // hide intro, show main content
-      document.getElementById("start-screen").style.display = "none";
-      document.getElementById("wrap").style.display = "block";
-
-      // play music
-      const audio = document.getElementById("bg-music");
-      if (audio) audio.play();
-
-      // start animations
-      startTypewriter();
-      startClock();
-      startTree();
-    }
-
-    // Typewriter effect
-    function startTypewriter() {
-      const el = document.getElementById("code");
-      const text = el.innerHTML;
-      el.innerHTML = "";
-      let i = 0;
-      function typing(){
-        if(i < text.length){
-          el.innerHTML += text.charAt(i);
-          i++;
-          setTimeout(typing, 50);
-        }
-      }
-      document.getElementById("text").style.display="block";
-      typing();
-    }
-
-    // Countdown
-    function startClock(){
-      function updateClock(){
-        const target = new Date("September 5, 2025 00:00:00");
-        const now = new Date();
-        let diff = Math.floor((target - now) / 1000);
-
-        if (diff < 0) {
-          document.getElementById("clock").innerHTML = "🎉 It's your Birthday Today! 🎉";
-          return;
+    <script>
+    (function() {
+        var canvas = $('#canvas');
+		
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
         }
 
-        const days = Math.floor(diff / (3600*24));
-        diff -= days*3600*24;
-        const hrs = Math.floor(diff / 3600);
-        diff -= hrs*3600;
-        const mins = Math.floor(diff / 60);
-        const secs = diff - mins*60;
+        var width = canvas.width();
+        var height = canvas.height();        
+        canvas.attr("width", width);
+        canvas.attr("height", height);
 
-        document.getElementById("clock").innerHTML =
-          days + " days " + hrs + " hours " + mins + " minutes " + secs + " seconds left 🎂";
-      }
-      setInterval(updateClock, 1000);
-      updateClock();
-    }
-
-    // Tree blossoms (falling flowers)
-    function startTree(){
-      const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
-      const flowers = [];
-
-      function Flower(x, y){
-        this.x = x;
-        this.y = y;
-        this.size = Math.random()*6+2;
-        this.color = "rgba(255,182,193,"+(Math.random()*0.8+0.2)+")";
-        this.dy = Math.random()*1+0.5;
-        this.dx = (Math.random()-0.5)*1;
-      }
-      Flower.prototype.draw=function(){
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fillStyle=this.color;
-        ctx.fill();
-      }
-      Flower.prototype.update=function(){
-        this.y += this.dy;
-        this.x += this.dx;
-        if(this.y > canvas.height) {
-          this.y = Math.random()*-20;
-          this.x = Math.random()*canvas.width;
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]] 
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650,
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10,
+            }
         }
-        this.draw();
-      }
 
-      function initFlowers(){
-        for(let i=0;i<300;i++){
-          const x = Math.random()*canvas.width;
-          const y = Math.random()*canvas.height;
-          flowers.push(new Flower(x,y));
-        }
-      }
-      function animate(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        flowers.forEach(f=>f.update());
-        requestAnimationFrame(animate);
-      }
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
 
-      initFlowers();
-      animate();
+        canvas.click(function(e) {
+            playAudio();
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            if (seed.hover(x, y)) {
+                hold = 0; 
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
+            }
+        }).mousemove(function(e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            canvas.toggleClass('hand', seed.hover(x, y));
+        });
 
-      window.addEventListener("resize", ()=>{
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-    }
-  </script>
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            canvas.css("background", "#ffe");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "none");
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+            $("#code").show().typewriter();
+        }));
+	    
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+            textAnimate().start();
+        }));
+
+        runAsync().start();
+    })();
+    </script>
 </body>
 </html>
 
