@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('../img2.png');
+  background-image: url('img2.png');
   background-size: cover;
   background-repeat: no-repeat;
   font-size: 14px;
@@ -33,10 +33,9 @@ a {
 #code {
   display: none;
   color: rgb(196, 255, 255);
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 70px;
   line-height: 25px;
-  font-size: larger;
   font-weight: bolder;
 }
 #clock-box {
@@ -77,10 +76,12 @@ a {
   margin-right: 150px;
 }
 
-#message-box{
+#message-box {
   position: absolute;
-  margin-top:450px;
+  top: 450px;
+  left: 50px;
   font-size: 25px;
   font-family: monospace;
+}
 
 }
