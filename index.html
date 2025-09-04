@@ -4,14 +4,45 @@
   <meta charset="UTF-8">
   <title>Happy Birthday My Jalpari 💖</title>
   <style>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday My Jalpari 💖</title>
+  <style>
     body {
       margin: 0;
       padding: 0;
-      background: url("img.png") no-repeat center center fixed; /* replace with img2.png if you want */
+      background: url("img.png") no-repeat center center fixed; /* put your image here */
       background-size: cover;
       font-family: "Segoe UI", sans-serif;
-      text-align: center;
       overflow: hidden;
+      text-align: center;
+    }
+    #start-screen {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      color: white;
+    }
+    #start-screen button {
+      background: #ff69b4;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(255,105,180,0.8);
+      transition: transform 0.2s;
+    }
+    #start-screen button:hover {
+      transform: scale(1.1);
     }
     #text { display: none; margin-top: 20px; position: relative; z-index: 2; }
     #code { font-size: 20px; line-height: 1.6; color: #fff; text-align: left; display: inline-block; }
@@ -20,6 +51,31 @@
     .say { display: block; margin: 5px 0; }
   </style>
 </head>
+<body>
+  <!-- Start Screen -->
+  <div id="start-screen">
+    <h1>💖 Happy Birthday My Jalpari 💖</h1>
+    <p>Click below to begin your surprise 🎉</p>
+    <button onclick="startExperience()">Start</button>
+  </div>
+
+  <!-- Main Content -->
+  <div id="wrap" style="display:none;">
+
+    #text { display: none; margin-top: 20px; position: relative; z-index: 2; }
+    #code { font-size: 20px; line-height: 1.6; color: #fff; text-align: left; display: inline-block; }
+    #clock-box { margin-top: 20px; font-size: 22px; color: #ffebf0; position: relative; z-index: 2; }
+    canvas { display: block; margin: 0 auto; background: transparent !important; position: relative; z-index: 1; }
+    .say { display: block; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <!-- Start Screen -->
+<div id="start-screen">
+  <h1>💖 Happy Birthday My Jalpari 💖</h1>
+  <p>Click below to begin your surprise 🎉</p>
+  <button onclick="startExperience()">Start</button>
+</div>
 <body>
   <div id="wrap">
     <div id="text">
@@ -135,7 +191,14 @@
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
-  </script>
+<script>
+function startExperience() {
+  document.getElementById("start-screen").style.display = "none"; // hide intro
+  document.getElementById("wrap").style.display = "block"; // show main content
+  document.querySelector("audio").play(); // start music
+}
+</script>
 </body>
 </html>
+
 
